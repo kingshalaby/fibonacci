@@ -6,11 +6,21 @@ defmodule Fibonacci do
   Contexts are also responsible for managing your data, regardless
   if it comes from the database, an external API or others.
   """
+  alias Fibonacci.Cache
 
   def calculate(0), do: 0
   def calculate(1), do: 1
 
-  def calculate(n), do: calculate(1, 0, n)
+  def calculate(n) do
+    case Cache.get(n) do
+      nil ->
+        value = calculate(1, 0, n)
+        Cache.set(n, value)
+      value ->
+        value
+    end
+
+  end
 
   def calculate(acc, _current, 1), do: acc
   def calculate(acc, current, n), do: calculate(acc + current, acc, n-1)

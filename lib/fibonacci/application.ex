@@ -12,6 +12,7 @@ defmodule Fibonacci.Application do
       FibonacciWeb.Endpoint,
       # Starts a worker by calling: Fibonacci.Worker.start_link(arg)
       # {Fibonacci.Worker, arg},
+      {Fibonacci.Cache, []},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
