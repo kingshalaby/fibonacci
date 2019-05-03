@@ -11,6 +11,12 @@ defmodule Fibonacci do
   def calculate(0), do: 0
   def calculate(1), do: 1
 
+  def calculate(arg) when is_list(arg) do
+    arg
+    |> Enum.reduce([], fn n, acc -> [calculate(n) | acc] end)
+    |> Enum.reverse
+  end
+
   def calculate(n) do
     case Cache.get(n) do
       nil ->

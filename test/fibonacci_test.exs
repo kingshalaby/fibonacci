@@ -17,6 +17,10 @@ defmodule FibonacciTest do
     test "it returns 354224848179261915075 given 100" do
       assert Fibonacci.calculate(100) === 354224848179261915075
     end
+
+    test "it returns a list of fibonacci results when given a list of numbers" do
+      assert Fibonacci.calculate([1, 10, 100]) === [1, 55, 354224848179261915075]
+    end
   end
 end
 
