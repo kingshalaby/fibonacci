@@ -7,9 +7,11 @@ defmodule Fibonacci do
   if it comes from the database, an external API or others.
   """
 
+  def calculate(0), do: 0
   def calculate(1), do: 1
-  def calculate(2), do: 1
-  def calculate(n) do
-    calculate(n-1) + calculate (n-2)
-  end
+
+  def calculate(n), do: calculate(1, 0, n)
+
+  def calculate(acc, _current, 1), do: acc
+  def calculate(acc, current, n), do: calculate(acc + current, acc, n-1)
 end

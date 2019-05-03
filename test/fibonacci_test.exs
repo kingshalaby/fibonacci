@@ -14,10 +14,9 @@ defmodule FibonacciTest do
       assert Fibonacci.calculate(10) === 55
     end
 
-    # this test is kinda fork bomb, my poor memory can not handle it
-    # test "it returns 354224848179261915075 given 100" do
-    #   assert Fibonacci.calculate(100) === 354224848179261915075
-    # end
+    test "it returns 354224848179261915075 given 100" do
+      assert Fibonacci.calculate(100) === 354224848179261915075
+    end
   end
 end
 
