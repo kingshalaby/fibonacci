@@ -28,6 +28,6 @@ defmodule Fibonacci do
 
   end
 
-  def calculate(acc, _current, 1), do: acc
-  def calculate(acc, current, n), do: calculate(acc + current, acc, n-1)
+  defp calculate(acc, _current, 1), do: acc
+  defp calculate(acc, current, n), do: calculate(acc + current, acc, n-1)
 end
