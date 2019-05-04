@@ -21,7 +21,9 @@ defmodule FibonacciTest do
     test "it returns a list of fibonacci results when given a list of numbers" do
       assert Fibonacci.calculate([1, 10, 100]) === [1, 55, 354_224_848_179_261_915_075]
     end
+  end
 
+  describe "history/0" do
     test "it returns a list of tuples holding previously requested numbers and their results" do
       Agent.update(Fibonacci.History, fn _state -> [] end)
       assert Fibonacci.history() === []
@@ -37,6 +39,21 @@ defmodule FibonacciTest do
       ]
 
       assert Fibonacci.history() === expected
+    end
+  end
+
+  describe "history_count/0" do
+    test "it returns a map with previously requested numbers with count of requests" do
+      Agent.update(Fibonacci.History, fn _state -> [] end)
+      assert Fibonacci.history_count() === %{}
+
+      assert Fibonacci.calculate(10) === 55
+      assert Fibonacci.calculate(7) === 13
+      assert Fibonacci.calculate(10) === 55
+
+      expected = %{10 => 2, 7 => 1}
+
+      assert Fibonacci.history_count() === expected
     end
   end
 end

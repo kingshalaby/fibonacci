@@ -24,6 +24,11 @@ defmodule Fibonacci do
     value
   end
 
+  def history_count() do
+    History.get()
+    |> Enum.reduce(%{}, fn {k, _v}, acc -> Map.update(acc, k, 1, &(&1 + 1)) end)
+  end
+
   def history() do
     History.get() |> Enum.reverse()
   end
