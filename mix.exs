@@ -33,11 +33,12 @@ defmodule Fibonacci.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, github: "phoenixframework/phoenix", override: true},
+      {:phoenix, "~> 1.4.0"},
       {:phoenix_pubsub, "~> 1.1"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:cowboy, "~> 1.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:plug, "~> 1.7"}
     ]
   end
 

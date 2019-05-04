@@ -5,7 +5,10 @@ defmodule FibonacciWeb.Router do
     plug(:accepts, ["json"])
   end
 
-  scope "/api", FibonacciWeb do
+  scope "/api/fibonacci", FibonacciWeb.Api, as: :api do
     pipe_through(:api)
+    get("/calculate/:number", IndexController, :calculate)
+    get("/history", IndexController, :history)
+    get("/history_count", IndexController, :history_count)
   end
 end
