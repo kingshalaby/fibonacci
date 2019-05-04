@@ -13,6 +13,7 @@ defmodule Fibonacci.Application do
       # Starts a worker by calling: Fibonacci.Worker.start_link(arg)
       # {Fibonacci.Worker, arg},
       {Fibonacci.Cache, []},
+      {Fibonacci.History, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

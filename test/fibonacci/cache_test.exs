@@ -6,6 +6,5 @@ defmodule Fibonacci.CacheTest do
 
     Fibonacci.Cache.set(10, 55)
     assert Fibonacci.Cache.get(10) == 55
-
   end
 end

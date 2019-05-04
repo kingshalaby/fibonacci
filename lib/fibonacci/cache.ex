@@ -31,6 +31,5 @@ defmodule Fibonacci.Cache do
   def init(state) do
     :ets.new(:fib_cache, [:set, :protected, :named_table])
     {:ok, state}
-
   end
 end

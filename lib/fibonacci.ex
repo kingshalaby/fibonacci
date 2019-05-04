@@ -6,28 +6,41 @@ defmodule Fibonacci do
   Contexts are also responsible for managing your data, regardless
   if it comes from the database, an external API or others.
   """
-  alias Fibonacci.Cache
+  alias Fibonacci.{History, Cache}
 
-  def calculate(0), do: 0
-  def calculate(1), do: 1
+  def calculate(arg) do
+    value =
+      case Cache.get(arg) do
+        nil ->
+          value = do_calculate(arg)
+          Cache.set(arg, value)
 
-  def calculate(arg) when is_list(arg) do
+        value ->
+          value
+      end
+
+    historify({arg, value})
+
+    value
+  end
+
+  def history() do
+    History.get() |> Enum.reverse()
+  end
+
+  defp historify(entry), do: History.add(entry)
+
+  defp do_calculate(0), do: 0
+  defp do_calculate(1), do: 1
+
+  defp do_calculate(arg) when is_list(arg) do
     arg
-    |> Enum.reduce([], fn n, acc -> [calculate(n) | acc] end)
-    |> Enum.reverse
+    |> Enum.reduce([], fn n, acc -> [do_calculate(n) | acc] end)
+    |> Enum.reverse()
   end
 
-  def calculate(n) do
-    case Cache.get(n) do
-      nil ->
-        value = calculate(1, 0, n)
-        Cache.set(n, value)
-      value ->
-        value
-    end
+  defp do_calculate(n) when not is_list(n), do: do_calculate(1, 0, n)
 
-  end
-
-  defp calculate(acc, _current, 1), do: acc
-  defp calculate(acc, current, n), do: calculate(acc + current, acc, n-1)
+  defp do_calculate(acc, _current, 1), do: acc
+  defp do_calculate(acc, current, n), do: do_calculate(acc + current, acc, n - 1)
 end

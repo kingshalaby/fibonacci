@@ -10,8 +10,7 @@ config :fibonacci, FibonacciWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "VG8BPDQeVxcZFbUQNtTEu017Mxmfcq6MXHw0hRt8ExC8mgLhNosZT1crH+Ydf/C0",
   render_errors: [view: FibonacciWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: Fibonacci.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Fibonacci.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -23,4 +22,4 @@ config :phoenix, :json_library, Jason
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"
